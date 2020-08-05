@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  EarthPictureViewController.swift
 //  NASA
 //
 //  Created by Anastasiya Osinskaya on 8/5/20.
@@ -8,13 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class EarthPictureViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
 
-
 }
-
