@@ -12,6 +12,7 @@ class DailyPictureViewController: UIViewController {
     
     // MARK: - IBOutlets
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageTitle: UILabel!
     @IBOutlet weak var explanation: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -40,13 +41,12 @@ class DailyPictureViewController: UIViewController {
                 self?.imageTitle.text = spaceModel.title
                 self?.explanation.text = spaceModel.explanation
                 self?.dateLabel.text = spaceModel.date
-                guard let spaceModelUrl = spaceModel.url else { return }
-                guard let url = URL(string: (spaceModelUrl)) else { return }
-                guard let data = try? Data(contentsOf: url) else { return }
-                if UIImage(data: data) != nil {
-                    self?.picOfTheDay.image = UIImage(data: data)
-                } else {
-                    self?.picOfTheDay.image = UIImage(named: "cosmos")
+                ImageLoader.shared.loadImage(from: spaceModel.url) { image in
+                    if image != nil {
+                        self?.picOfTheDay.image = image
+                    } else {
+                        self?.picOfTheDay.image = UIImage(named: Constants.defaultImage)
+                    }
                 }
             }
         }
