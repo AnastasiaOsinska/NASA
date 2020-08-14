@@ -17,6 +17,7 @@ class Constants {
     static let earth = "earth"
     static let mars = "mars"
     static let picture = "picture"
+    let path = "ImageCache"
     static let tag = 0
     static let numberOfRow = 0
 }

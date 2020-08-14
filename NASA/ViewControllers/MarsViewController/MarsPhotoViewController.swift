@@ -47,6 +47,14 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
             }
         )}
     
+    private func getImage(indexPath: IndexPath, imageURL: String?){
+        ImageLoader.shared.getImage(from: imageURL, completion: { [weak self] (image) in
+            DispatchQueue.main.async {
+                (self?.tableView.cellForRow(at: indexPath) as? MarsPhotoTableViewCell)?.marsPhoto.image = image
+            }
+        })
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoData?.photos.count ?? Constants.numberOfRow
     }
@@ -59,15 +67,8 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.solDate.text = (String(describing: result.sol))
             }
             cell.marsPhoto.image = nil
-            if let strUrl = result.img_src,
-                let imgUrl = URL(string: strUrl){
-//                cell.marsPhoto.loadImageWithUrl(imgUrl)
-        ImageLoader.shared.loadImage(from: strUrl) { image in
-                    cell.marsPhoto.image = image
-                }
-        }
+            getImage(indexPath: indexPath, imageURL: result.img_src)
         }
         return cell
     }
-    
 }

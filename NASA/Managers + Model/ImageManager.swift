@@ -10,61 +10,71 @@ import Foundation
 import UIKit
 
 class ImageLoader: UIImageView {
-let imageCache = NSCache<AnyObject, AnyObject>()
     
-    var imageURL: URL?
+    // MARK: - Properties
+    let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     static let shared = ImageLoader()
-    let activityIndicator = UIActivityIndicatorView()
-
-    func loadImageWithUrl(_ url: URL) {
-        activityIndicator.color = .darkGray
-        addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        imageURL = url
-        image = nil
-        activityIndicator.startAnimating()
-        if let imageFromCache = imageCache.object(forKey: url as AnyObject) as? UIImage {
-            self.image = imageFromCache
-            activityIndicator.stopAnimating()
-            return
-        }
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-            if error != nil {
-                print(error as Any)
-                DispatchQueue.main.async(execute: {
-                    self.activityIndicator.stopAnimating()
-                })
+    
+    // MARK: - Methods
+    
+    func getImage(from url: String?, completion: @escaping (_ image: UIImage?) -> Void) {
+        guard let url = url else { return }
+        guard let nameOfImage = URL(string: url)?.lastPathComponent else { return }
+        readImage(nameOfImage: nameOfImage) { [weak self] image in
+            guard let image = image else {
+                self?.loadImage(from: url) { image in
+                    guard let image = image else {
+                        completion(nil)
+                        return
+                    }
+                    self?.saveImage(nameOfImage: nameOfImage, img: image)
+                    completion(image)
+                }
                 return
             }
-            DispatchQueue.main.async(execute: {
-                if let unwrappedData = data, let imageToCache = UIImage(data: unwrappedData) {
-
-                    if self.imageURL == url {
-                        self.image = imageToCache
-                    }
-
-                    self.imageCache.setObject(imageToCache, forKey: url as AnyObject)
-                }
-                self.activityIndicator.stopAnimating()
-            })
-        }).resume()
+            completion(image)
+        }
     }
     
-    func loadImage(from url: String?, completion: @escaping (_ image: UIImage?) -> Void) {
-           guard let url = URL(string: url ?? "") else {
-               completion(nil)
-               return
-           }
-           DispatchQueue.global().async {
-               guard let data = try? Data(contentsOf: url) else {
-                   completion(nil)
-                   return
-               }
-               DispatchQueue.main.async {
-                   completion(UIImage(data: data))
-               }
-           }
-       }
+    // MARK: - Private API
+    
+    private func loadImage(from url: String?, completion: @escaping (_ image: UIImage?) -> Void) {
+        guard let stringUrl = url else {
+            completion(nil)
+            return
+        }
+        guard let url = URL(string: stringUrl) else {
+            completion(nil)
+            return
+        }
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else {
+                completion(nil)
+                return
+            }
+            DispatchQueue.main.async {
+                completion(UIImage(data: data))
+            }
+        }
+    }
+    
+    // MARK: - Save Image
+    
+    private func saveImage(nameOfImage: String, img: UIImage) {
+        let fileURL = directoryURL.appendingPathComponent(nameOfImage)
+        if let data = img.pngData() {
+            try? data.write(to: fileURL, options: .atomic)
+        }
+    }
+    
+    // MARK: - Read Image
+    
+    private func readImage(nameOfImage: String, completion: @escaping (_ img: UIImage?) -> Void) {
+        do {
+            let savedData = try Data(contentsOf: directoryURL.appendingPathComponent(nameOfImage))
+            completion(UIImage(data: savedData))
+        } catch {
+            completion(nil)
+        }
+    }
 }

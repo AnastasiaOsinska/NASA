@@ -41,7 +41,7 @@ class DailyPictureViewController: UIViewController {
                 self?.imageTitle.text = spaceModel.title
                 self?.explanation.text = spaceModel.explanation
                 self?.dateLabel.text = spaceModel.date
-                ImageLoader.shared.loadImage(from: spaceModel.url) { image in
+                ImageLoader.shared.getImage(from: spaceModel.url) { image in
                     if image != nil {
                         self?.picOfTheDay.image = image
                     } else {
