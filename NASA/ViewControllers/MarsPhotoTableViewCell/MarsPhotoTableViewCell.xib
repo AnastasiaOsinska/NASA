@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarsPhotoTableViewCell" customModule="NASA" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MarsPhotoTableViewCellID" rowHeight="433" id="KGk-i7-Jjw" customClass="MarsPhotoTableViewCell" customModule="NASA" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="346" height="433"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="346" height="433"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e6O-on-jy1" userLabel="marsPhoto">
+                        <rect key="frame" x="0.0" y="0.0" width="346" height="346"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="e6O-on-jy1" secondAttribute="height" multiplier="1:1" id="ZAS-mp-sSn"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l76-f2-mKe" userLabel="earthDate">
+                        <rect key="frame" x="8" y="362" width="330" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsR-OR-bhu" userLabel="solDate">
+                        <rect key="frame" x="8" y="391" width="330" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="e6O-on-jy1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="04u-at-bko"/>
+                    <constraint firstItem="IsR-OR-bhu" firstAttribute="top" secondItem="l76-f2-mKe" secondAttribute="bottom" constant="8" id="4nh-nM-Xhh"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="IsR-OR-bhu" secondAttribute="bottom" constant="8" id="73O-Dn-6DO"/>
+                    <constraint firstItem="IsR-OR-bhu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="E3w-OQ-4LB"/>
+                    <constraint firstItem="e6O-on-jy1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Es0-z4-lGD"/>
+                    <constraint firstItem="l76-f2-mKe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="FXP-qn-HYc"/>
+                    <constraint firstItem="l76-f2-mKe" firstAttribute="top" secondItem="e6O-on-jy1" secondAttribute="bottom" constant="16" id="LRJ-cg-jrZ"/>
+                    <constraint firstAttribute="trailing" secondItem="IsR-OR-bhu" secondAttribute="trailing" constant="8" id="LXL-yX-O6X"/>
+                    <constraint firstAttribute="trailing" secondItem="l76-f2-mKe" secondAttribute="trailing" constant="8" id="OTx-OE-bhR"/>
+                    <constraint firstItem="e6O-on-jy1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="UmO-5W-3o4"/>
+                    <constraint firstAttribute="trailing" secondItem="e6O-on-jy1" secondAttribute="trailing" id="g3g-SP-2xO"/>
+                    <constraint firstItem="e6O-on-jy1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uWY-rh-gww"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="earthDate" destination="l76-f2-mKe" id="eGi-nt-86E"/>
+                <outlet property="marsPhoto" destination="e6O-on-jy1" id="0bE-7y-DBu"/>
+                <outlet property="solDate" destination="IsR-OR-bhu" id="auB-4a-nb4"/>
+            </connections>
+            <point key="canvasLocation" x="155.07246376811597" y="212.61160714285714"/>
+        </tableViewCell>
+    </objects>
+</document>

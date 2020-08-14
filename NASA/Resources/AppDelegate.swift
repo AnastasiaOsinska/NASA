@@ -19,26 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         let tabBarController = UITabBarController()
         let dailyPictureViewController = DailyPictureViewController()
-        let marsWeatherViewController = MarsWeatherViewController()
+        let marsPhotoViewController = MarsPhotoViewController()
         let earthPictureViewController = EarthPictureViewController()
         
-        let tabIcon1 = UITabBarItem(title: nil, image: UIImage(named: "1"), tag: 0)
-        let tabIcon2 = UITabBarItem(title: nil, image: UIImage(named: "1"), tag: 0)
-        let tabIcon3 = UITabBarItem(title: nil, image: UIImage(named: "1"), tag: 0)
-        
+        let tabIcon1 = UITabBarItem(title: nil, image: UIImage(named: Constants.picture), tag: Constants.tag)
+        let tabIcon2 = UITabBarItem(title: nil, image: UIImage(named: Constants.mars), tag: Constants.tag)
+        let tabIcon3 = UITabBarItem(title: nil, image: UIImage(named: Constants.earth), tag: Constants.tag)
+            
         dailyPictureViewController.tabBarItem = tabIcon1
-        marsWeatherViewController.tabBarItem = tabIcon2
+        marsPhotoViewController.tabBarItem = tabIcon2
         earthPictureViewController.tabBarItem = tabIcon3
         
-        let controllers = [dailyPictureViewController,marsWeatherViewController,earthPictureViewController]
+        let controllers = [dailyPictureViewController,marsPhotoViewController,earthPictureViewController]
         tabBarController.viewControllers = controllers
+        
         let navigationController = UINavigationController(rootViewController: tabBarController)
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController = navigationController
         
         return true
     }
-    
-    
 }
 

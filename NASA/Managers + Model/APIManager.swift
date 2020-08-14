@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class APIManager {
     
@@ -18,7 +19,7 @@ class APIManager {
     
     private init() { }
     
-    // MARK: - Get Data Api
+    // MARK: - Get Data From Api
     
     func getDataFromAPI(completion: @escaping (_ spaceModel: SpaceModel?) -> Void){
         let urlString = Constants.apiKey
@@ -38,6 +39,23 @@ class APIManager {
         task.resume()
     }
     
+    func getMarsPhotoFromAPI(completion: @escaping (_ photo: Photos?) -> Void){
+           let urlString = Constants.marsApi
+           let url = URL(string: urlString)
+           guard let unwrappedUrl = url else { return }
+           let session = URLSession.shared
+           let task = session.dataTask(with: unwrappedUrl) { (data, response, error) in
+               guard let unwrappedData = data else { return }
+               do {
+                   let jsonDecoder = JSONDecoder()
+                   let photos = try jsonDecoder.decode(Photos.self, from: unwrappedData)
+                   completion(photos)
+               } catch {
+                   print(error)
+               }
+           }
+           task.resume()
+       }
 }
 
 
