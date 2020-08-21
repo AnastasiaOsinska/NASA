@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SpaceModel: Codable {
+final class SpaceModel: Codable {
     var copyright : String?
     var date : String?
     var explanation : String?

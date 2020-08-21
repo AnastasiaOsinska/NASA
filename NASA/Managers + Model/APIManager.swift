@@ -40,22 +40,48 @@ class APIManager {
     }
     
     func getMarsPhotoFromAPI(completion: @escaping (_ photo: Photos?) -> Void){
-           let urlString = Constants.marsApi
-           let url = URL(string: urlString)
-           guard let unwrappedUrl = url else { return }
-           let session = URLSession.shared
-           let task = session.dataTask(with: unwrappedUrl) { (data, response, error) in
-               guard let unwrappedData = data else { return }
-               do {
-                   let jsonDecoder = JSONDecoder()
-                   let photos = try jsonDecoder.decode(Photos.self, from: unwrappedData)
-                   completion(photos)
-               } catch {
-                   print(error)
-               }
-           }
-           task.resume()
-       }
+        let urlString = Constants.marsApi
+        let url = URL(string: urlString)
+        guard let unwrappedUrl = url else { return }
+        let session = URLSession.shared
+        let task = session.dataTask(with: unwrappedUrl) { (data, response, error) in
+            guard let unwrappedData = data else { return }
+            do {
+                let jsonDecoder = JSONDecoder()
+                let photos = try jsonDecoder.decode(Photos.self, from: unwrappedData)
+                completion(photos)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func getEarthPhotoFromAPI(completion: @escaping (_ image: [Image]?) -> Void){
+        let urlString = Constants.earthApi
+        let url = URL(string: urlString)
+        guard let unwrappedUrl = url else { return }
+        let session = URLSession.shared
+        let task = session.dataTask(with: unwrappedUrl) { (data, response, error) in
+            guard let unwrappedData = data else { return }
+            do {
+                let jsonDecoder = JSONDecoder()
+                let images = try jsonDecoder.decode([Image].self, from: unwrappedData)
+                completion(images)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+    }
+    
+    func buildUrl(stringDate: String?, imageName: String) -> String?{
+        //let stringDate = "2014-01-12 00:00:00"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "2014-01-12 00:00:00"
+        guard let date = dateFormatter.date(from: dateFormatter.dateFormat) else { return stringDate }
+        dateFormatter.dateFormat = "yyyy/MM/dd"
+        let stringDate = dateFormatter.string(from: date)
+        return "https://epic.gsfc.nasa.gov/archive/natural/\(stringDate)/png/\(imageName).png"
+    }
 }
-
-

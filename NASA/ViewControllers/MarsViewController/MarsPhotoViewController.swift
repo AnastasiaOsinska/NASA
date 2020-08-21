@@ -18,14 +18,22 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     
     var photoData : Photos?
     
+    let myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoadIndicator.shared.showSpinner(onView: self.view)
         tableView.register(UINib(nibName: Constants.nibName, bundle: nil), forCellReuseIdentifier: Constants.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         setUpView()
+        tableView.refreshControl = myRefreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,9 +45,16 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Methods
     
+    @objc private func refresh(sender: UIRefreshControl){
+        sender.endRefreshing()
+        setUpView()
+        tableView.reloadData()
+    }
+    
     func setUpView(){
         APIManager.shared.getMarsPhotoFromAPI(completion: { [weak self] (photos) in
             DispatchQueue.main.async {
+                LoadIndicator.shared.removeSpinner()
                 guard let photos = photos else { return }
                 self?.photoData = photos
                 self?.tableView.reloadData()
@@ -67,7 +82,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.solDate.text = (String(describing: result.sol))
             }
             cell.marsPhoto.image = nil
-            getImage(indexPath: indexPath, imageURL: result.img_src)
+            self.getImage(indexPath: indexPath, imageURL: result.img_src)
         }
         return cell
     }

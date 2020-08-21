@@ -12,9 +12,10 @@
 		3969775324DC5235006804EC /* MarsPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3969775124DC5235006804EC /* MarsPhotoTableViewCell.swift */; };
 		3969775424DC5235006804EC /* MarsPhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3969775224DC5235006804EC /* MarsPhotoTableViewCell.xib */; };
 		399EF8AA24E40E7100FC80C0 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EF8A924E40E7100FC80C0 /* ImageManager.swift */; };
-		39A4D19F24F000B000A9FE8A /* EarthPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A4D19D24F000B000A9FE8A /* EarthPictureTableViewCell.swift */; };
-		39A4D1A024F000B000A9FE8A /* EarthPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A4D19E24F000B000A9FE8A /* EarthPictureTableViewCell.xib */; };
-		39A4D1A224F0064400A9FE8A /* EarthPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A4D1A124F0064400A9FE8A /* EarthPhoto.swift */; };
+		399EF8AC24EBD40300FC80C0 /* EarthPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EF8AB24EBD40300FC80C0 /* EarthPhoto.swift */; };
+		399EF8B024EBDCDC00FC80C0 /* EarthPictureTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 399EF8AE24EBDCDC00FC80C0 /* EarthPictureTableViewCell.xib */; };
+		399EF8B224EC1C9F00FC80C0 /* EarthPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E77F7924DAA1F600A42E37 /* EarthPictureViewController.swift */; };
+		399EF8B324EC1CA300FC80C0 /* EarthPictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399EF8AD24EBDCDC00FC80C0 /* EarthPictureTableViewCell.swift */; };
 		39E77F5A24DAA11000A42E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E77F5924DAA11000A42E37 /* AppDelegate.swift */; };
 		39E77F6324DAA11A00A42E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 39E77F6224DAA11A00A42E37 /* Assets.xcassets */; };
 		39E77F6624DAA11A00A42E37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39E77F6424DAA11A00A42E37 /* LaunchScreen.storyboard */; };
@@ -22,7 +23,6 @@
 		39E77F7224DAA1AC00A42E37 /* DailyPictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39E77F7024DAA1AC00A42E37 /* DailyPictureViewController.xib */; };
 		39E77F7624DAA1CF00A42E37 /* MarsPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E77F7424DAA1CF00A42E37 /* MarsPhotoViewController.swift */; };
 		39E77F7724DAA1CF00A42E37 /* MarsPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39E77F7524DAA1CF00A42E37 /* MarsPhotoViewController.xib */; };
-		39E77F7B24DAA1F600A42E37 /* EarthPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E77F7924DAA1F600A42E37 /* EarthPictureViewController.swift */; };
 		39E77F7C24DAA1F600A42E37 /* EarthPictureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39E77F7A24DAA1F600A42E37 /* EarthPictureViewController.xib */; };
 		39E77F7F24DAB58F00A42E37 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E77F7E24DAB58F00A42E37 /* APIManager.swift */; };
 		39E77F8224DAC1B500A42E37 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E77F8124DAC1B500A42E37 /* Constants.swift */; };
@@ -35,9 +35,9 @@
 		3969775124DC5235006804EC /* MarsPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarsPhotoTableViewCell.swift; sourceTree = "<group>"; };
 		3969775224DC5235006804EC /* MarsPhotoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarsPhotoTableViewCell.xib; sourceTree = "<group>"; };
 		399EF8A924E40E7100FC80C0 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		39A4D19D24F000B000A9FE8A /* EarthPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthPictureTableViewCell.swift; sourceTree = "<group>"; };
-		39A4D19E24F000B000A9FE8A /* EarthPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarthPictureTableViewCell.xib; sourceTree = "<group>"; };
-		39A4D1A124F0064400A9FE8A /* EarthPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthPhoto.swift; sourceTree = "<group>"; };
+		399EF8AB24EBD40300FC80C0 /* EarthPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthPhoto.swift; sourceTree = "<group>"; };
+		399EF8AD24EBDCDC00FC80C0 /* EarthPictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthPictureTableViewCell.swift; sourceTree = "<group>"; };
+		399EF8AE24EBDCDC00FC80C0 /* EarthPictureTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarthPictureTableViewCell.xib; sourceTree = "<group>"; };
 		39E77F5624DAA11000A42E37 /* NASA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		39E77F5924DAA11000A42E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		39E77F6224DAA11A00A42E37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,13 +74,13 @@
 			path = MarsPhotoTableViewCell;
 			sourceTree = "<group>";
 		};
-		39A4D19C24F0009100A9FE8A /* EarthPictureTableViewCell */ = {
+		399EF8B124EBDCE200FC80C0 /* EarthViewController */ = {
 			isa = PBXGroup;
 			children = (
-				39A4D19D24F000B000A9FE8A /* EarthPictureTableViewCell.swift */,
-				39A4D19E24F000B000A9FE8A /* EarthPictureTableViewCell.xib */,
+				399EF8AD24EBDCDC00FC80C0 /* EarthPictureTableViewCell.swift */,
+				399EF8AE24EBDCDC00FC80C0 /* EarthPictureTableViewCell.xib */,
 			);
-			path = EarthPictureTableViewCell;
+			path = EarthViewController;
 			sourceTree = "<group>";
 		};
 		39E77F4D24DAA11000A42E37 = {
@@ -113,10 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				39E77F6E24DAA17A00A42E37 /* DailyPictureViewController */,
-				3969775524DC523A006804EC /* MarsPhotoTableViewCell */,
 				39E77F7324DAA1B300A42E37 /* MarsViewController */,
-				39A4D19C24F0009100A9FE8A /* EarthPictureTableViewCell */,
+				3969775524DC523A006804EC /* MarsPhotoTableViewCell */,
 				39E77F7824DAA1DA00A42E37 /* EarthPictureViewController */,
+				399EF8B124EBDCE200FC80C0 /* EarthViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -163,11 +163,11 @@
 		39E77F8024DAB5FC00A42E37 /* Managers + Model */ = {
 			isa = PBXGroup;
 			children = (
-				39A4D1A124F0064400A9FE8A /* EarthPhoto.swift */,
 				39E77F7E24DAB58F00A42E37 /* APIManager.swift */,
 				39E77F8324DAC8C300A42E37 /* SpaceModel.swift */,
 				3969774F24DC45B3006804EC /* MarsPhoto.swift */,
 				399EF8A924E40E7100FC80C0 /* ImageManager.swift */,
+				399EF8AB24EBD40300FC80C0 /* EarthPhoto.swift */,
 				3955E83424EFEF5800586028 /* LoadIndicatorManager.swift */,
 			);
 			path = "Managers + Model";
@@ -235,7 +235,7 @@
 				39E77F7224DAA1AC00A42E37 /* DailyPictureViewController.xib in Resources */,
 				39E77F7C24DAA1F600A42E37 /* EarthPictureViewController.xib in Resources */,
 				3969775424DC5235006804EC /* MarsPhotoTableViewCell.xib in Resources */,
-				39A4D1A024F000B000A9FE8A /* EarthPictureTableViewCell.xib in Resources */,
+				399EF8B024EBDCDC00FC80C0 /* EarthPictureTableViewCell.xib in Resources */,
 				39E77F6324DAA11A00A42E37 /* Assets.xcassets in Resources */,
 				39E77F7724DAA1CF00A42E37 /* MarsPhotoViewController.xib in Resources */,
 			);
@@ -249,17 +249,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				39E77F5A24DAA11000A42E37 /* AppDelegate.swift in Sources */,
-				39A4D1A224F0064400A9FE8A /* EarthPhoto.swift in Sources */,
 				399EF8AA24E40E7100FC80C0 /* ImageManager.swift in Sources */,
 				3969775324DC5235006804EC /* MarsPhotoTableViewCell.swift in Sources */,
-				39E77F7B24DAA1F600A42E37 /* EarthPictureViewController.swift in Sources */,
 				39E77F7F24DAB58F00A42E37 /* APIManager.swift in Sources */,
-				39A4D19F24F000B000A9FE8A /* EarthPictureTableViewCell.swift in Sources */,
 				39E77F8424DAC8C300A42E37 /* SpaceModel.swift in Sources */,
+				399EF8B324EC1CA300FC80C0 /* EarthPictureTableViewCell.swift in Sources */,
 				3955E83524EFEF5800586028 /* LoadIndicatorManager.swift in Sources */,
 				39E77F7624DAA1CF00A42E37 /* MarsPhotoViewController.swift in Sources */,
 				39E77F7124DAA1AC00A42E37 /* DailyPictureViewController.swift in Sources */,
+				399EF8B224EC1C9F00FC80C0 /* EarthPictureViewController.swift in Sources */,
 				3969775024DC45B3006804EC /* MarsPhoto.swift in Sources */,
+				399EF8AC24EBD40300FC80C0 /* EarthPhoto.swift in Sources */,
 				39E77F8224DAC1B500A42E37 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
