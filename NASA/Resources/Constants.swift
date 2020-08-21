@@ -20,7 +20,12 @@ final class Constants {
     static let earth = "earth"
     static let mars = "mars"
     static let picture = "picture"
-    let path = "ImageCache"
+    static let path = "ImageCache"
+    static let buildUrl = "https://epic.gsfc.nasa.gov/archive/natural/"
+    static let png = "/png/"
+    static let dotPng = ".png"
+    static let newDateFormat = "yyyy/MM/dd"
+    static let oldDateFormat = "2014-01-12 00:00:00"
     static let tag = 0
     static let numberOfRow = 0
 }
