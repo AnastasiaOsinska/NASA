@@ -8,11 +8,11 @@
 
 import Foundation
 
-class Photos: Codable {
+final class Photos: Codable {
     var photos: [Photo]
 }
 
-class Photo: Codable {
+final class Photo: Codable {
     var img_src : String?
     var earth_date : String?
     var sol : Int?

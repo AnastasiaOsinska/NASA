@@ -23,20 +23,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOK-81-1YY">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6X-Ad-kfe">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMz-Qf-SOr" userLabel="imageTitle">
                                     <rect key="frame" x="30" y="30" width="354" height="0.0"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9P-0h-d1s" userLabel="dateLabel">
                                     <rect key="frame" x="20" y="46" width="374" height="0.0"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -46,19 +46,18 @@
                                         <constraint firstAttribute="height" constant="262" id="TZB-UE-OAj"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CAU-XY-FBK" userLabel="explanation">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAU-XY-FBK" userLabel="explanation">
                                     <rect key="frame" x="20" y="344" width="374" height="0.0"/>
                                     <accessibility key="accessibilityConfiguration">
                                         <accessibilityTraits key="traits" none="YES"/>
                                     </accessibility>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="CAU-XY-FBK" secondAttribute="bottom" constant="16" id="2zW-B5-Vqg"/>
                                 <constraint firstItem="CAU-XY-FBK" firstAttribute="top" secondItem="eP4-KU-tL0" secondAttribute="bottom" constant="16" id="3ky-yq-aiE"/>
                                 <constraint firstAttribute="trailing" secondItem="CAU-XY-FBK" secondAttribute="trailing" constant="20" id="BD2-K2-Eh4"/>
                                 <constraint firstItem="gMz-Qf-SOr" firstAttribute="top" secondItem="r6X-Ad-kfe" secondAttribute="top" constant="30" id="EzZ-T3-6pc"/>
@@ -75,21 +74,23 @@
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="r6X-Ad-kfe" secondAttribute="trailing" id="5hJ-Bf-cWd"/>
-                        <constraint firstItem="r6X-Ad-kfe" firstAttribute="top" secondItem="fOK-81-1YY" secondAttribute="top" id="VBI-9d-awt"/>
-                        <constraint firstItem="r6X-Ad-kfe" firstAttribute="height" secondItem="fOK-81-1YY" secondAttribute="height" id="dk3-Tq-eGd"/>
-                        <constraint firstAttribute="bottom" secondItem="r6X-Ad-kfe" secondAttribute="bottom" id="ndD-FE-xz5"/>
+                        <constraint firstItem="r6X-Ad-kfe" firstAttribute="top" secondItem="fOK-81-1YY" secondAttribute="top" id="618-cI-DVp"/>
+                        <constraint firstItem="r6X-Ad-kfe" firstAttribute="centerX" secondItem="fOK-81-1YY" secondAttribute="centerX" priority="250" id="Af9-cx-Rbn"/>
+                        <constraint firstItem="r6X-Ad-kfe" firstAttribute="bottom" secondItem="YdB-2T-P3m" secondAttribute="bottom" id="EJc-Lk-ISZ"/>
+                        <constraint firstAttribute="bottom" secondItem="CAU-XY-FBK" secondAttribute="bottom" constant="16" id="Qip-4s-PHG"/>
+                        <constraint firstAttribute="trailing" secondItem="CAU-XY-FBK" secondAttribute="trailing" constant="20" id="SgE-xe-bWw"/>
                         <constraint firstItem="r6X-Ad-kfe" firstAttribute="width" secondItem="fOK-81-1YY" secondAttribute="width" id="oGd-H4-blu"/>
-                        <constraint firstItem="r6X-Ad-kfe" firstAttribute="leading" secondItem="fOK-81-1YY" secondAttribute="leading" id="qUw-Wj-Sif"/>
                     </constraints>
-                    <viewLayoutGuide key="contentLayoutGuide" id="fI3-70-a9x"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="R4g-r7-jPH"/>
+                    <viewLayoutGuide key="contentLayoutGuide" id="emI-8h-SlC"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="YdB-2T-P3m"/>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="fOK-81-1YY" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="392-zD-npP"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="fOK-81-1YY" secondAttribute="top" constant="44" id="qa0-nY-KwC"/>
+                <constraint firstAttribute="bottom" secondItem="fOK-81-1YY" secondAttribute="bottom" priority="250" id="0LC-Jj-3Hm"/>
+                <constraint firstAttribute="trailing" secondItem="fOK-81-1YY" secondAttribute="trailing" id="4Vc-qr-J7J"/>
+                <constraint firstItem="fOK-81-1YY" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="IaD-jL-scA"/>
+                <constraint firstItem="fOK-81-1YY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="U5K-d4-7a2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fOK-81-1YY" secondAttribute="trailing" id="sEN-fh-9dN"/>
                 <constraint firstItem="fOK-81-1YY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xaP-m9-xpj"/>
             </constraints>

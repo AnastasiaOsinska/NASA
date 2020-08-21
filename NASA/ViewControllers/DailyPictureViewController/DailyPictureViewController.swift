@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DailyPictureViewController: UIViewController {
-    
+
     // MARK: - IBOutlets
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -18,25 +19,67 @@ class DailyPictureViewController: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var picOfTheDay: UIImageView!
     
+    // MARK: - Properties
+    
+    var spinner : UIView?
+    
+    let myRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
+        return refreshControl
+    }()
+    
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoadIndicator.shared.showSpinner(onView: self.view)
         setUpView()
+        scrollView.refreshControl = myRefreshControl
     }
     
     override func viewDidAppear(_ animated: Bool) {
            super.viewDidAppear(animated)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
       }
     
     // MARK: - Methods
     
+    @objc private func refresh(sender: UIRefreshControl){
+        sender.endRefreshing()
+        setUpView()
+        scrollView.reloadInputViews()
+    }
+    
+    private func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+        DispatchQueue.global().async {
+            let url = URL(string: "https://img.youtube.com/watch?v=9WKSHMOkWqE/#.jpg")
+            let asset = AVAsset(url: url!)
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+            avAssetImageGenerator.appliesPreferredTrackTransform = true
+            let thumnailTime = CMTimeMake(value: 0, timescale: 1)
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil)
+                let thumbImage = UIImage(cgImage: cgThumbImage)
+                DispatchQueue.main.async {
+                    completion(thumbImage)
+                }
+            } catch {
+                print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    completion(nil) 
+                }
+            }
+        }
+    }
+    
     func setUpView(){
         APIManager.shared.getDataFromAPI(completion: { [weak self] (spaceModel) in
             DispatchQueue.main.async {
+                LoadIndicator.shared.removeSpinner()
                 guard let spaceModel = spaceModel else { return }
                 self?.imageTitle.text = spaceModel.title
                 self?.explanation.text = spaceModel.explanation
