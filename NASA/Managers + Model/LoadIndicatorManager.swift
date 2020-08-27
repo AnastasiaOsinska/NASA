@@ -20,7 +20,7 @@ class LoadIndicator : UIViewController {
         spinnerView.backgroundColor = UIColor.clear
         let ai = UIActivityIndicatorView.init(style: .large)
         ai.startAnimating()
-        ai.center = spinnerView.center
+        ai.center = self.view.center
         DispatchQueue.main.async {
             spinnerView.addSubview(ai)
             onView.addSubview(spinnerView)

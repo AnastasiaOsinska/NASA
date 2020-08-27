@@ -74,14 +74,13 @@ class APIManager {
         }
         task.resume()
     }
-    
-    func buildUrl(stringDate: String?, imageName: String) -> String?{
-        //let stringDate = "2014-01-12 00:00:00"
+
+    func buildUrl(stringDate: String?, imageName: String) -> String? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "2014-01-12 00:00:00"
-        guard let date = dateFormatter.date(from: dateFormatter.dateFormat) else { return stringDate }
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        let stringDate = dateFormatter.string(from: date)
-        return "https://epic.gsfc.nasa.gov/archive/natural/\(stringDate)/png/\(imageName).png"
+        dateFormatter.dateFormat = Constants.oldDateFormat
+        guard let date = dateFormatter.date(from: stringDate ?? "") else { return "" }
+        dateFormatter.dateFormat = Constants.newDateFormat
+        let stringDateNew = dateFormatter.string(from: date)
+        return "\(Constants.buildUrl)\(stringDateNew)\(Constants.png)\(imageName)\(Constants.dotPng)"
     }
 }

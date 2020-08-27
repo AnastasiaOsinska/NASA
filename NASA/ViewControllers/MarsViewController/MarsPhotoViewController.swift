@@ -13,11 +13,12 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var searchBarView: SearchBarView!
     
     // MARK: - Properties
     
     var photoData : Photos?
-    
     let myRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
@@ -34,13 +35,21 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         setUpView()
         tableView.refreshControl = myRefreshControl
+        searchBarView.searchAction = { [weak self] hidden in
+            UIView.animate(withDuration: 0.5) {
+                self?.searchViewHeight.constant = hidden ? 50 : 110
+                self?.view.layoutIfNeeded()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     // MARK: - Methods

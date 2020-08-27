@@ -42,6 +42,8 @@ class EarthPictureViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: - Methods
@@ -54,8 +56,8 @@ class EarthPictureViewController: UIViewController, UITableViewDataSource, UITab
     
     func setUpView(){
         APIManager.shared.getEarthPhotoFromAPI(completion: { [weak self] (images) in
-            LoadIndicator.shared.removeSpinner()
             DispatchQueue.main.async {
+                LoadIndicator.shared.removeSpinner()
                 guard let images = images else { return }
                 self?.imageData = images
                 self?.tableView.reloadData()
@@ -86,8 +88,8 @@ class EarthPictureViewController: UIViewController, UITableViewDataSource, UITab
                 cell.dateLabel.text = result.date
                 cell.earthImageView.image = nil
             }
-            let url = APIManager.shared.buildUrl(stringDate: result.date!, imageName: result.image!)
-            self.getImage(indexPath: indexPath, imageURL: url)
+            let url = APIManager.shared.buildUrl(stringDate: result.date, imageName: result.image ?? "") 
+            getImage(indexPath: indexPath, imageURL: url)
         }
         return cell
     }

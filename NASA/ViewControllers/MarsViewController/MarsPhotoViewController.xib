@@ -9,6 +9,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarsPhotoViewController" customModule="NASA" customModuleProvider="target">
             <connections>
+                <outlet property="searchBarView" destination="2CP-mn-Bgz" id="Jta-KE-EU4"/>
+                <outlet property="searchViewHeight" destination="Bu2-j5-17l" id="rfr-Rq-QAw"/>
                 <outlet property="tableView" destination="Ny3-SQ-6yf" id="jRY-1S-aPa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,18 +21,29 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ny3-SQ-6yf">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="94" width="414" height="802"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2CP-mn-Bgz" customClass="SearchBarView" customModule="NASA" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Bu2-j5-17l"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Ny3-SQ-6yf" secondAttribute="bottom" id="3Sh-tg-lbt"/>
+                <constraint firstItem="Ny3-SQ-6yf" firstAttribute="top" secondItem="2CP-mn-Bgz" secondAttribute="bottom" id="3Xa-FW-CcR"/>
+                <constraint firstAttribute="trailing" secondItem="2CP-mn-Bgz" secondAttribute="trailing" id="5A5-jC-WE7"/>
                 <constraint firstItem="Ny3-SQ-6yf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5Nd-Ti-7no"/>
                 <constraint firstItem="Ny3-SQ-6yf" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Hc7-gX-DVX"/>
-                <constraint firstItem="Ny3-SQ-6yf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="g7v-LG-DBT"/>
+                <constraint firstItem="2CP-mn-Bgz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="b2P-qx-Jj8"/>
+                <constraint firstItem="2CP-mn-Bgz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hZ9-5r-Zst"/>
+                <constraint firstAttribute="bottom" secondItem="Ny3-SQ-6yf" secondAttribute="bottom" id="lYH-3a-HLN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="137.68115942028987" y="83.705357142857139"/>
+            <point key="canvasLocation" x="188" y="-48"/>
         </view>
     </objects>
 </document>
