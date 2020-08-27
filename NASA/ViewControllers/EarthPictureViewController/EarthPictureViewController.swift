@@ -10,6 +10,11 @@ import UIKit
 
 class EarthPictureViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    private struct Constants {
+        static let earthId = "EarthPictureTableViewCellID"
+        static let xibName = "EarthPictureTableViewCell"
+    }
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -88,10 +93,10 @@ class EarthPictureViewController: UIViewController, UITableViewDataSource, UITab
                 cell.dateLabel.text = result.date
                 cell.earthImageView.image = nil
             }
-            let url = APIManager.shared.buildUrl(stringDate: result.date, imageName: result.image ?? "") 
+            let url = APIManager.shared.buildEarthUrl(stringDate: result.date, imageName: result.image ?? "")
             getImage(indexPath: indexPath, imageURL: url)
         }
         return cell
     }
-
+    
 }

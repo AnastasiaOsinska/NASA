@@ -91,7 +91,6 @@ final class SearchBarView: NibLoadingView {
     
     @IBAction func searchButtonAction(_ sender: Any) {
         searchBarIsHidden = !searchBarIsHidden
-      
         if searchBarIsHidden {
             searchBar.resignFirstResponder()
         } else {

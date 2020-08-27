@@ -11,6 +11,10 @@ import AVFoundation
 
 class DailyPictureViewController: UIViewController {
     
+    private struct Constants {
+        static let defaultImage = "cosmos"
+    }
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -34,7 +38,7 @@ class DailyPictureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         LoadIndicator.shared.showSpinner(onView: self.view)
-        setUpView()
+        getData()
         scrollView.refreshControl = myRefreshControl
     }
     
@@ -52,7 +56,7 @@ class DailyPictureViewController: UIViewController {
     
     @objc private func refresh(sender: UIRefreshControl){
         sender.endRefreshing()
-        setUpView()
+        getData()
         scrollView.reloadInputViews()
     }
     
@@ -78,28 +82,32 @@ class DailyPictureViewController: UIViewController {
         }
     }
     
-    func setUpView(){
+    func getData() {
         APIManager.shared.getDataFromAPI(completion: { [weak self] (spaceModel) in
             DispatchQueue.main.async {
                 LoadIndicator.shared.removeSpinner()
                 guard let spaceModel = spaceModel else { return }
-                self?.imageTitle.text = spaceModel.title
-                self?.explanation.text = spaceModel.explanation
-                self?.dateLabel.text = spaceModel.date
-                ImageLoader.shared.getImage(from: spaceModel.url) { image in
-                    if image != nil {
-                        self?.picOfTheDay.image = image
+                self?.setUpView(with: spaceModel)
+            }
+        })
+    }
+    
+    func setUpView(with spaceModel: SpaceModel) {
+        imageTitle.text = spaceModel.title
+        explanation.text = spaceModel.explanation
+        dateLabel.text = spaceModel.date
+        ImageLoader.shared.getImage(from: spaceModel.url) { image in
+            if image != nil {
+                self.picOfTheDay.image = image
+            } else {
+                self.getThumbnailImageFromVideoUrl(url: spaceModel.url) { thumbImage in
+                    if thumbImage != nil {
+                        self.picOfTheDay.image = thumbImage
                     } else {
-                        self?.getThumbnailImageFromVideoUrl(url: spaceModel.url) { thumbImage in
-                            if thumbImage != nil {
-                                self?.picOfTheDay.image = thumbImage
-                            } else {
-                                self?.picOfTheDay.image = UIImage(named: Constants.defaultImage)
-                            }
-                        }
+                        self.picOfTheDay.image = UIImage(named: Constants.defaultImage)
                     }
                 }
             }
-            }
-        )}
+        }
+    }
 }

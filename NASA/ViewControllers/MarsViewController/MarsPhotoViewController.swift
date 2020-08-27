@@ -10,6 +10,14 @@ import UIKit
 
 class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    private struct Constants {
+        static let numberOfRow = 0
+        static let nibName = "MarsPhotoTableViewCell"
+        static let identifier = "MarsPhotoTableViewCellID"
+        static let duration : Double = 0.5
+        static let minCostant : CGFloat = 50
+        static let maxConstant : CGFloat = 100
+    }
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -36,8 +44,8 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         setUpView()
         tableView.refreshControl = myRefreshControl
         searchBarView.searchAction = { [weak self] hidden in
-            UIView.animate(withDuration: 0.5) {
-                self?.searchViewHeight.constant = hidden ? 50 : 110
+            UIView.animate(withDuration: Constants.duration) {
+                self?.searchViewHeight.constant = hidden ? Constants.minCostant : Constants.maxConstant
                 self?.view.layoutIfNeeded()
             }
         }
@@ -49,7 +57,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.isNavigationBarHidden = true
     }
     
     // MARK: - Methods
@@ -91,7 +99,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
                 cell.solDate.text = (String(describing: result.sol))
             }
             cell.marsPhoto.image = nil
-            self.getImage(indexPath: indexPath, imageURL: result.img_src)
+            getImage(indexPath: indexPath, imageURL: result.img_src)
         }
         return cell
     }
