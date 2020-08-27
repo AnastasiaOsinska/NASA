@@ -74,13 +74,13 @@ class APIManager {
         }
         task.resume()
     }
-    
-    func buildUrl(stringDate: String?, imageName: String) -> String?{
+
+    func buildUrl(stringDate: String?, imageName: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = Constants.oldDateFormat
-        guard let date = dateFormatter.date(from: dateFormatter.dateFormat) else { return stringDate }
+        guard let date = dateFormatter.date(from: stringDate ?? "") else { return "" }
         dateFormatter.dateFormat = Constants.newDateFormat
-        let stringDate = dateFormatter.string(from: date)
-        return "\(Constants.buildUrl)\(stringDate)\(Constants.png)\(imageName)\(Constants.dotPng)"
+        let stringDateNew = dateFormatter.string(from: date)
+        return "\(Constants.buildUrl)\(stringDateNew)\(Constants.png)\(imageName)\(Constants.dotPng)"
     }
 }

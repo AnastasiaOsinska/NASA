@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class DailyPictureViewController: UIViewController {
-
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -39,12 +39,14 @@ class DailyPictureViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-           super.viewDidAppear(animated)
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-          super.viewWillAppear(animated)
-      }
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = false
+        navigationController?.hidesBarsOnSwipe = true
+    }
     
     // MARK: - Methods
     
@@ -54,7 +56,7 @@ class DailyPictureViewController: UIViewController {
         scrollView.reloadInputViews()
     }
     
-    private func getThumbnailImageFromVideoUrl(url: URL, completion: @escaping ((_ image: UIImage?)->Void)) {
+    private func getThumbnailImageFromVideoUrl(url: String?, completion: @escaping ((_ image: UIImage?)->Void)) {
         DispatchQueue.global().async {
             let url = URL(string: "https://img.youtube.com/watch?v=9WKSHMOkWqE/#.jpg")
             let asset = AVAsset(url: url!)
@@ -88,11 +90,16 @@ class DailyPictureViewController: UIViewController {
                     if image != nil {
                         self?.picOfTheDay.image = image
                     } else {
-                        self?.picOfTheDay.image = UIImage(named: Constants.defaultImage)
+                        self?.getThumbnailImageFromVideoUrl(url: spaceModel.url) { thumbImage in
+                            if thumbImage != nil {
+                                self?.picOfTheDay.image = thumbImage
+                            } else {
+                                self?.picOfTheDay.image = UIImage(named: Constants.defaultImage)
+                            }
+                        }
                     }
                 }
             }
-        }
-    )}
+            }
+        )}
 }
-

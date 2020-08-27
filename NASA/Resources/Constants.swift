@@ -10,7 +10,7 @@ import Foundation
 
 final class Constants {
     static let apiKey = "https://api.nasa.gov/planetary/apod?api_key=GwY5NDy8QYbxTsRzsqxFSwPf8AeflhIUB1IcYmIn"
-    static let marsApi = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=GwY5NDy8QYbxTsRzsqxFSwPf8AeflhIUB1IcYmIn"
+    static let marsApi = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=2000&api_key=GwY5NDy8QYbxTsRzsqxFSwPf8AeflhIUB1IcYmIn"
     static let earthApi = "https://epic.gsfc.nasa.gov/api/natural"
     static let defaultImage = "cosmos"
     static let nibName = "MarsPhotoTableViewCell"
