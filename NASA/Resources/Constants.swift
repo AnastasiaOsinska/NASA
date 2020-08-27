@@ -20,7 +20,6 @@ final class Constants {
     static let earth = "earth"
     static let mars = "mars"
     static let picture = "picture"
-    let path = "ImageCache"
     static let path = "ImageCache"
     static let buildUrl = "https://epic.gsfc.nasa.gov/archive/natural/"
     static let png = "/png/"
