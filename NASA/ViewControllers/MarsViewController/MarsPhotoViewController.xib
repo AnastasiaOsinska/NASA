@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarsPhotoViewController" customModule="NASA" customModuleProvider="target">
             <connections>
+                <outlet property="infoLabel" destination="bMk-kl-mG8" id="YNK-vK-biW"/>
                 <outlet property="searchBarView" destination="2CP-mn-Bgz" id="Jta-KE-EU4"/>
                 <outlet property="searchViewHeight" destination="Bu2-j5-17l" id="rfr-Rq-QAw"/>
                 <outlet property="tableView" destination="Ny3-SQ-6yf" id="jRY-1S-aPa"/>
@@ -30,6 +31,12 @@
                         <constraint firstAttribute="height" constant="50" id="Bu2-j5-17l"/>
                     </constraints>
                 </view>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, we couldn't find" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMk-kl-mG8">
+                    <rect key="frame" x="121" y="436.5" width="172.5" height="23.5"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
@@ -37,6 +44,8 @@
                 <constraint firstItem="Ny3-SQ-6yf" firstAttribute="top" secondItem="2CP-mn-Bgz" secondAttribute="bottom" id="3Xa-FW-CcR"/>
                 <constraint firstAttribute="trailing" secondItem="2CP-mn-Bgz" secondAttribute="trailing" id="5A5-jC-WE7"/>
                 <constraint firstItem="Ny3-SQ-6yf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5Nd-Ti-7no"/>
+                <constraint firstItem="bMk-kl-mG8" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="715-W2-8Id"/>
+                <constraint firstItem="bMk-kl-mG8" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="E3a-r6-zCJ"/>
                 <constraint firstItem="Ny3-SQ-6yf" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Hc7-gX-DVX"/>
                 <constraint firstItem="2CP-mn-Bgz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="b2P-qx-Jj8"/>
                 <constraint firstItem="2CP-mn-Bgz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hZ9-5r-Zst"/>

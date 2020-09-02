@@ -16,4 +16,10 @@ final class Photo: Codable {
     var img_src : String?
     var earth_date : String?
     var sol : Int?
+    var camera : Camera
+}
+
+final class Camera: Codable {
+    var name : String?
+    var full_name : String?
 }

@@ -113,7 +113,11 @@ class APIManager {
 }
 
 extension Date {
+        func someDaysAgoDate(_ count: Int) -> Date {
+            return Calendar.current.date(byAdding: .day, value: -count, to: noon)!
+        }
     static var yesterday: Date { return Date().dayBefore }
+    
     var dayBefore: Date {
         return Calendar.current.date(byAdding: .day, value: Constants.value, to: noon)!
     }

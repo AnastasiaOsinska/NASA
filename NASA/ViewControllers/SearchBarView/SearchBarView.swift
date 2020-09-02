@@ -8,34 +8,18 @@
 
 import UIKit
 
-final class SearchBarView: NibLoadingView {
-    
-    enum Style {
-        case black
-        case white
-        
-        var color: UIColor {
-            switch self {
-            case .black:
-                return UIColor.black
-            case .white:
-                return UIColor.blue
-            }
-        }
-        var searchImage: UIImage {
-            switch self {
-            case .black:
-                return #imageLiteral(resourceName: "searchIconBlack")
-            case .white:
-                return #imageLiteral(resourceName: "searchIconWhite")
-            }
-        }
-    }
+protocol HeaderViewDelegate: AnyObject {
+    func search(text: String)
+    func searchBar(is hidden: Bool)
+}
+
+final class SearchBarView: NibLoadingView, UISearchBarDelegate {
     
     // MARK: - Constants
     
     private struct Constants {
         static let closeButtonRadius: CGFloat = 4
+        static let animationDuration: TimeInterval = 0.5
     }
     
     // MARK: - IBOutlets
@@ -47,27 +31,26 @@ final class SearchBarView: NibLoadingView {
     @IBOutlet weak var searchView: UIView!
     
     // MARK: - Properties
-
-    var searchAction: ((Bool) -> Void)?
+    
+    private var searchStr = ""
+    var delegate: HeaderViewDelegate?
+    var actionSearch: ((Bool) -> Void)?
     var searchBarIsHidden: Bool = true {
         didSet {
             updateSearchBar()
-            guard let searchAction = searchAction else {
+            delegate?.searchBar(is: searchBarIsHidden)
+            guard let actionSearch = actionSearch else {
                 return
             }
-            searchAction(searchBarIsHidden)
-        }
-    }
-    var style: Style = .white {
-        didSet {
-            searchButton.setImage(style.searchImage, for: .normal)
+            actionSearch(searchBarIsHidden)
         }
     }
     
     // MARK: - View life cycle
     
     override func awakeFromNib() {
-     
+        searchBar.delegate = self
+        searchBarIsHidden = true
     }
     
     
@@ -75,10 +58,11 @@ final class SearchBarView: NibLoadingView {
     
     private func updateSearchBar() {
         if searchBarIsHidden {
+            searchBar.text = ""
             searchView.isHidden = true
             searchButton.contentHorizontalAlignment = .trailing
             searchButton.backgroundColor = .clear
-            searchButton.setImage(style.searchImage, for: .normal)
+            searchButton.setImage(#imageLiteral(resourceName: "searchIconWhite"), for: .normal)
         } else {
             searchView.isHidden = false
             searchButton.contentHorizontalAlignment = .center
@@ -96,5 +80,31 @@ final class SearchBarView: NibLoadingView {
         } else {
             searchBar.becomeFirstResponder()
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            searchBar.resignFirstResponder()
+            return false
+        }
+        searchStr = NSString(string: searchBar.text!).replacingCharacters(in: range, with: text)
+        delegate?.search(text: searchStr)
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setTextFieldColor(color: .white, textColor: .darkGray)
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setTextFieldColor(color: .darkGray, textColor: .white)
+    }
+}
+
+extension UISearchBar {
+    func setTextFieldColor(color: UIColor, textColor: UIColor) {
+        self.searchTextField.backgroundColor = color
+        self.searchTextField.textColor = textColor
+        self.searchTextField.tintColor = .darkGray
     }
 }

@@ -8,31 +8,44 @@
 
 import UIKit
 
-class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate {
     
     private struct Constants {
-        static let numberOfRow = 0
+        static let searchMessage = "Sorry, we couldn't find any information"
         static let nibName = "MarsPhotoTableViewCell"
         static let identifier = "MarsPhotoTableViewCellID"
+        static let numberOfRow = 0
+        static let standartAnimationDuration: Double = 0.4
         static let duration : Double = 0.5
         static let minCostant : CGFloat = 50
         static let maxConstant : CGFloat = 100
+        
     }
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchViewHeight: NSLayoutConstraint!
     @IBOutlet weak var searchBarView: SearchBarView!
-    
+    @IBOutlet weak var infoLabel: UILabel!
+
     // MARK: - Properties
     
-    var photoData : Photos?
+    var loading: Bool = false
+    var filteredPhotos: [Camera] = []
+    private var cellModels: [Any] = []
+    private var photoData: Photos?
     let myRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: .valueChanged)
         return refreshControl
     }()
-    
+    let searchController = UISearchController(searchResultsController: nil)
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
@@ -43,7 +56,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.delegate = self
         setUpView()
         tableView.refreshControl = myRefreshControl
-        searchBarView.searchAction = { [weak self] hidden in
+        searchBarView.actionSearch = { [weak self] hidden in
             UIView.animate(withDuration: Constants.duration) {
                 self?.searchViewHeight.constant = hidden ? Constants.minCostant : Constants.maxConstant
                 self?.view.layoutIfNeeded()
@@ -61,6 +74,32 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     // MARK: - Methods
+
+    func filterContentForSearchText(_ searchText: String,
+                                    category: Camera? = nil) {
+      filteredPhotos = filteredPhotos.filter { (photo: Camera) -> Bool in
+        return (photo.full_name?.lowercased().contains(searchText.lowercased()) ?? false)
+        }
+      tableView.reloadData()
+    }
+    
+    private func searchAction(with text: String) {
+        func updateInfoLabel(hide: Bool) {
+            infoLabel.text = Constants.searchMessage + "'\(text)'"
+            infoLabel.alpha = hide ? 0 : 1
+            infoLabel.isHidden = hide
+            UIView.animate(withDuration: Constants.standartAnimationDuration) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        guard !text.isEmpty else {
+            updateInfoLabel(hide: true)
+            return
+        }
+        
+        updateInfoLabel(hide: !cellModels.isEmpty)
+        tableView.reloadData()
+    }
     
     @objc private func refresh(sender: UIRefreshControl){
         sender.endRefreshing()
@@ -72,7 +111,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         APIManager.shared.getMarsPhotoFromAPI(completion: { [weak self] (photos) in
             DispatchQueue.main.async {
                 LoadIndicator.shared.removeSpinner()
-                guard let photos = photos else { return }
+                guard photos != nil else { return }
                 self?.photoData = photos
                 self?.tableView.reloadData()
             }
@@ -88,6 +127,9 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+          return filteredPhotos.count
+        }
         return photoData?.photos.count ?? Constants.numberOfRow
     }
     
@@ -96,11 +138,42 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         if let result = self.photoData?.photos[indexPath.row] {
             DispatchQueue.main.async {
                 cell.earthDate.text = result.earth_date
-                cell.solDate.text = (String(describing: result.sol))
+                let int: Int = result.sol!
+                let string = String(int)
+                cell.solDate.text = "SOL: \(string)"
+                cell.fullNameLabel.text = result.camera.full_name
             }
             cell.marsPhoto.image = nil
             getImage(indexPath: indexPath, imageURL: result.img_src)
-        }
+            cell.selectionStyle = .none
+            cell.clipsToBounds = true
+            cell.layer.cornerRadius = 10
+       }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 40
+    }
+    
+    // MARK: - HeaderViewDelegate
+    
+    func search(text: String) {
+        searchAction(with: text)
+    }
+    
+    func searchBar(is hidden: Bool) {
+        if hidden {
+            searchAction(with: "")
+        }
+        UIView.animate(withDuration: Constants.standartAnimationDuration) {
+            self.view.layoutIfNeeded()
+        }
     }
 }

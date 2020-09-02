@@ -15,5 +15,5 @@ class MarsPhotoTableViewCell: UITableViewCell {
     @IBOutlet weak var marsPhoto: UIImageView!
     @IBOutlet weak var solDate: UILabel!
     @IBOutlet weak var earthDate: UILabel!
-
+    @IBOutlet weak var fullNameLabel: UILabel!
 }
