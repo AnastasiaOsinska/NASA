@@ -32,12 +32,13 @@ final class SearchBarView: NibLoadingView, UISearchBarDelegate {
     
     // MARK: - Properties
     
-    private var searchStr = ""
+    var searchStr = ""
     var delegate: HeaderViewDelegate?
     var actionSearch: ((Bool) -> Void)?
     var searchBarIsHidden: Bool = true {
         didSet {
             updateSearchBar()
+            searchStr = searchBarIsHidden ? "" : searchStr
             delegate?.searchBar(is: searchBarIsHidden)
             guard let actionSearch = actionSearch else {
                 return
@@ -76,6 +77,7 @@ final class SearchBarView: NibLoadingView, UISearchBarDelegate {
     @IBAction func searchButtonAction(_ sender: Any) {
         searchBarIsHidden = !searchBarIsHidden
         if searchBarIsHidden {
+            searchStr = ""
             searchBar.resignFirstResponder()
         } else {
             searchBar.becomeFirstResponder()

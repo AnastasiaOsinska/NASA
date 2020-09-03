@@ -31,7 +31,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     // MARK: - Properties
     
     var loading: Bool = false
-    var filteredPhotos: [Camera] = []
+    var filteredPhotos: [Photo] = []
     private var cellModels: [Any] = []
     private var photoData: Photos?
     let myRefreshControl: UIRefreshControl = {
@@ -40,11 +40,9 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         return refreshControl
     }()
     let searchController = UISearchController(searchResultsController: nil)
-    var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
+
     var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
+        return !searchBarView.searchStr.isEmpty
     }
     // MARK: - Lifecycles
     
@@ -62,6 +60,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
                 self?.view.layoutIfNeeded()
             }
         }
+        searchBarView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,12 +74,14 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Methods
 
-    func filterContentForSearchText(_ searchText: String,
-                                    category: Camera? = nil) {
-      filteredPhotos = filteredPhotos.filter { (photo: Camera) -> Bool in
-        return (photo.full_name?.lowercased().contains(searchText.lowercased()) ?? false)
+    func filterContentForSearchText(_ searchText: String) {
+        guard let photos = photoData?.photos else { return }
+        filteredPhotos = photos.filter { (photo: Photo) -> Bool in
+            return (photo.camera.full_name?.lowercased().contains(searchText.lowercased()) ?? false)
         }
-      tableView.reloadData()
+        infoLabel.alpha = !filteredPhotos.isEmpty ? 0 : 1
+        infoLabel.isHidden = !filteredPhotos.isEmpty
+        tableView.reloadData()
     }
     
     private func searchAction(with text: String) {
@@ -94,6 +95,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
         }
         guard !text.isEmpty else {
             updateInfoLabel(hide: true)
+            tableView.reloadData()
             return
         }
         
@@ -135,20 +137,21 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.identifier, for: indexPath) as? MarsPhotoTableViewCell else { return UITableViewCell() }
-        if let result = self.photoData?.photos[indexPath.row] {
-            DispatchQueue.main.async {
-                cell.earthDate.text = result.earth_date
-                let int: Int = result.sol!
-                let string = String(int)
-                cell.solDate.text = "SOL: \(string)"
-                cell.fullNameLabel.text = result.camera.full_name
-            }
-            cell.marsPhoto.image = nil
-            getImage(indexPath: indexPath, imageURL: result.img_src)
-            cell.selectionStyle = .none
-            cell.clipsToBounds = true
-            cell.layer.cornerRadius = 10
-       }
+        guard let result = isFiltering ? filteredPhotos[indexPath.row] : photoData?.photos[indexPath.row] else {
+            return UITableViewCell()
+        }
+      //  DispatchQueue.main.async {
+            cell.earthDate.text = result.earth_date
+            let int: Int = result.sol!
+            let string = String(int)
+            cell.solDate.text = "SOL: \(string)"
+            cell.fullNameLabel.text = result.camera.full_name
+     //   }
+        cell.marsPhoto.image = nil
+        getImage(indexPath: indexPath, imageURL: result.img_src)
+        cell.selectionStyle = .none
+        cell.clipsToBounds = true
+        cell.layer.cornerRadius = 10
         return cell
     }
     
@@ -166,6 +169,7 @@ class MarsPhotoViewController: UIViewController, UITableViewDataSource, UITableV
     
     func search(text: String) {
         searchAction(with: text)
+        filterContentForSearchText(text)
     }
     
     func searchBar(is hidden: Bool) {
